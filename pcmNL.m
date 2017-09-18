@@ -1,4 +1,4 @@
-function pcm=pcmNL()
+function pcm=pcmNL(posNL)
     rayon_navette = 3.5;
     hauteur_navette_cylindre = 27.93;
     hauteur_navette_cone = 9.31;
@@ -50,5 +50,5 @@ function pcm=pcmNL()
     cm_propulseur_x_neg = (masse_propulseur_cylindre * cm_propulseur_cylindre_x_neg + masse_propulseur_cone * cm_propulseur_cone_x_neg) / masse_propulseur;
 
     masse_totale = masse_navette + masse_reservoir + masse_propulseur * 2;
-    pcm = (masse_navette * cm_navette + masse_reservoir * cm_reservoir + masse_propulseur * (cm_propulseur_x_pos + cm_propulseur_x_neg)) / masse_totale;
+    pcm = posNL + (masse_navette * cm_navette + masse_reservoir * cm_reservoir + masse_propulseur * (cm_propulseur_x_pos + cm_propulseur_x_neg)) / masse_totale;
 end
