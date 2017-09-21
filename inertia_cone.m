@@ -1,5 +1,5 @@
 function inertia = inertia_cone(m, r, h)
-    ix = 3 * m / 20 * (r ^ 2 + 4 * h^2);
+    ix = (12 * r^2 + 3 * h^2) / 80;
     iy = ix;
-    iz = 3 * m * r ^ 2 / 10;
-    inertia = [ix iy iz];
+    iz = (3 * r^2) / 10;
+    inertia = m * [ix iy iz];

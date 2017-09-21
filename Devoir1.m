@@ -116,3 +116,5 @@ function [pcmNL INL alphaNL]=Devoir1(AngRot, vangulaire, forces, posNL)
 
     INL = id_nav_cyl + id_nav_cone + id_res_top + id_res_bot + id_res_cone + id_prop_left_cyl + id_prop_left_cone + id_prop_right_cyl + id_prop_right_cone;
 
+
+    

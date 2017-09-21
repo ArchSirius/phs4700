@@ -1,5 +1,5 @@
 function inertia=inertia_cylindre(m, r, h)
-    ix = m / 12 * (3 * r ^ 2 + h ^ 2);
+    ix = (3 * r^2 + h^2) / 12;
     iy = ix;
-    iz = (m * r ^ 2) / 2;
-    inertia = [ix iy iz];
+    iz = (r ^ 2) / 2;
+    inertia = m * [ix iy iz];
