@@ -99,10 +99,12 @@ function [pcmNL INL alphaNL]=Devoir1(AngRot, vangulaire, forces, posNL)
     
     
     % TOTAL %
-    pcmNL = diag(cm_compute(...
+    centre_de_masse = cm_compute(...
         [m_nav m_res m_prop m_prop],...
         [cm_navette; cm_reservoire; cm_prop_left; cm_prop_right]...
-    ));
+    );
+
+    pcmNL = diag(centre_de_masse)
 
     id_nav_cyl = translate_inertia(ic_nav_cyl, pcmNL, cm_nav_cyl, m_nav_cyl);
     id_nav_cone = translate_inertia(ic_nav_cone, pcmNL, cm_nav_cone, m_nav_cone);
@@ -114,7 +116,8 @@ function [pcmNL INL alphaNL]=Devoir1(AngRot, vangulaire, forces, posNL)
     id_prop_right_cyl = translate_inertia(ic_prop_right_cyl, pcmNL, cm_prop_right_cyl, m_prop_cyl);
     id_prop_right_cone = translate_inertia(ic_prop_right_cone, pcmNL, cm_prop_right_cone, m_prop_cone);
 
-    INL = id_nav_cyl + id_nav_cone + id_res_top + id_res_bot + id_res_cone + id_prop_left_cyl + id_prop_left_cone + id_prop_right_cyl + id_prop_right_cone;
+    INL = id_nav_cyl + id_nav_cone + id_res_top + id_res_bot + id_res_cone + id_prop_left_cyl + id_prop_left_cone + id_prop_right_cyl + id_prop_right_cone
 
-
-    
+    posForces = posNL+[[0 0 0]; prop_left_cyl_offset; prop_right_cyl_offset];
+    forces = horzcat(zeros(3,2), forces.');
+    alphaNL = aAngulaire(forces, centre_de_masse, INL, vangulaire, AngRot, posForces)
