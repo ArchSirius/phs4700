@@ -18,15 +18,19 @@ function [coup, tf, rbf, vbf] = Devoir2(option, rbi, vbi, wbi)
   
   	q = [rbf; vbf; wbi]
   
-	hold on;
+    rbfx = []
+    rbfy = []
+    rbfz = []
 	while coup < 0
 		coup = coup_verification(rbf)
 		q = SEDRK4t0(q, tf, deltaT, g);
 		rbf = q(1,:);
+        rbfx = [rbfx; rbf(1)]
+        rbfy = [rbfy; rbf(2)]
+        rbfz = [rbfz; rbf(3)]
 		vbf = q(2,:);
-		figure;
-		plot = plot3(rbf(1), rbf(2), rbf(3));
+		plot3(rbfx, rbfy, rbfz);
+        drawnow
 		tf = tf + deltaT
-	end
-	hold off;
-	saveas(plot, 'figure.png');
+    end
+    
