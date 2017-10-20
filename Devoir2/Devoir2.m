@@ -1,6 +1,6 @@
 function [coup, tf, rbf, vbf] = Devoir2(option, rbi, vbi, wbi) 
 
-	deltaT = 0.01;
+	deltaT = 0.000001;
 	tf = 0;
 	rbf = rbi;
 	vbf = vbi;
@@ -16,7 +16,7 @@ function [coup, tf, rbf, vbf] = Devoir2(option, rbi, vbi, wbi)
   		error('Unwanted option exception')
   	end
   
-  	q = [rbf; vbf; wbi; [0 0 0]]
+  	q = [rbf; vbf; wbi]
   
 	while coup < 0
 		coup = coup_verification(rbf)
@@ -24,5 +24,4 @@ function [coup, tf, rbf, vbf] = Devoir2(option, rbi, vbi, wbi)
 		rbf = q(1,:);
 		vbf = q(2,:);
 		tf = tf + deltaT
-    		q(4) = tf
 	end

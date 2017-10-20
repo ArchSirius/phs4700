@@ -12,5 +12,5 @@ function k1 = option3(q0, tn)
   v = velocity(vi, deltat, a) - vi;
   r = position(ri, v, a, deltat) - ri;
   w = [0 0 0];
-  t = [0 0 0];
+  t = [ti 0 0];
   k1 = [r; v; w; t];

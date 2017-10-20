@@ -13,3 +13,5 @@ k2=feval(g,q0+k1*Deltat/2,t0+Deltat/2);
 k3=feval(g,q0+k2*Deltat/2,t0+Deltat/2);
 k4=feval(g,q0+k3*Deltat,t0+Deltat);
 qs=q0+Deltat*(k1+2*k2+2*k3+k4)/6;
+q0
+qs
