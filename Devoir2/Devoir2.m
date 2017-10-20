@@ -1,6 +1,6 @@
 function [coup, tf, rbf, vbf] = Devoir2(option, rbi, vbi, wbi) 
-
-	deltaT = 0.01;
+    
+	deltaT = 0.001;
 	tf = 0;
 	rbf = rbi;
 	vbf = vbi;
@@ -21,16 +21,19 @@ function [coup, tf, rbf, vbf] = Devoir2(option, rbi, vbi, wbi)
     rbfx = []
     rbfy = []
     rbfz = []
+      
 	while coup < 0
-		coup = coup_verification(rbf)
+		coup = coup_verification(rbf);
 		q = SEDRK4t0(q, tf, deltaT, g);
 		rbf = q(1,:);
-        rbfx = [rbfx; rbf(1)]
-        rbfy = [rbfy; rbf(2)]
-        rbfz = [rbfz; rbf(3)]
+        rbfx = [rbfx; rbf(1)];
+        rbfy = [rbfy; rbf(2)];
+        rbfz = [rbfz; rbf(3)];
 		vbf = q(2,:);
 		plot3(rbfx, rbfy, rbfz);
         drawnow
-		tf = tf + deltaT
+		tf = tf + deltaT;
     end
+    
+    
     
