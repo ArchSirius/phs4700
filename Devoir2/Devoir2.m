@@ -6,29 +6,29 @@ function Devoir2(option, rbi, vbi, wbi)
 	vbf = vbi;
 	coup = coup_verification(rbf);
 
-		if option == 1
-			g = 'option1';
-		elseif option == 2
-			g = 'option2';
-		elseif option == 3
-			g = 'option3';
-		else
-			error('Unwanted option exception')
-		end
+	if option == 1
+		g = 'option1';
+	elseif option == 2
+		g = 'option2';
+	elseif option == 3
+		g = 'option3';
+	else
+		error('Unwanted option exception')
+	end
 
-		q = [rbf; vbf; wbi];
+	q = [rbf; vbf; wbi];
 
-		rbfx = [];
-		rbfy = [];
-		rbfz = [];
+	rbfx = [];
+	rbfy = [];
+	rbfz = [];
 
 	tic
 	while coup < 0
 		q = SEDRK4t0(q, tf, deltaT, g);
 		rbf = q(1,:);
-				rbfx = [rbfx; rbf(1)];
-				rbfy = [rbfy; rbf(2)];
-				rbfz = [rbfz; rbf(3)];
+		rbfx = [rbfx; rbf(1)];
+		rbfy = [rbfy; rbf(2)];
+		rbfz = [rbfz; rbf(3)];
 		vbf = q(2,:);
 		plot3(rbfx, rbfy, rbfz);
 		drawnow;
