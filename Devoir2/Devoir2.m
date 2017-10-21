@@ -4,7 +4,7 @@ function Devoir2(option, rbi, vbi, wbi)
 	tf = 0;
 	rbf = rbi;
 	vbf = vbi;
-	coup = -1;
+	coup = coup_verification(rbf);
 
 		if option == 1
 			g = 'option1';
@@ -22,8 +22,8 @@ function Devoir2(option, rbi, vbi, wbi)
 		rbfy = [];
 		rbfz = [];
 
+	tic
 	while coup < 0
-		coup = coup_verification(rbf);
 		q = SEDRK4t0(q, tf, deltaT, g);
 		rbf = q(1,:);
 				rbfx = [rbfx; rbf(1)];
@@ -33,7 +33,9 @@ function Devoir2(option, rbi, vbi, wbi)
 		plot3(rbfx, rbfy, rbfz);
 		drawnow;
 		tf = tf + deltaT;
+		coup = coup_verification(rbf);
 	end
+	toc
 
 	coup
 	tf
