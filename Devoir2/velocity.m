@@ -1,3 +1,2 @@
-function v=velocity(vi, deltat, a)
-  v = vi + a*deltat;
-  
+function v = velocity(vi, deltat, a)
+	v = vi + a*deltat;

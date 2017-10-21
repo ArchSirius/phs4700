@@ -1,5 +1,4 @@
-function [coup] = coup_verification(rbi)
-
+function coup = coup_verification(rbi)
 	rayon = 0.0199;
 
 	if (rbi(1)>=0-rayon && rbi(1)<1.37-rayon) && (rbi(2)>=0-rayon && rbi(2)<=1.525+rayon) && (rbi(3)<=0.76+rayon)
