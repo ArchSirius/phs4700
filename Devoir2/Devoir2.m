@@ -4,7 +4,7 @@ function Devoir2(option, rbi, vbi, wbi)
 	tf = 0;
 	rbf = rbi;
 	vbf = vbi;
-	coup = coup_verification(rbf);
+	coup = coup_verification(rbi, rbf);
 
 	if option == 1
 		g = 'option1';
@@ -33,11 +33,7 @@ function Devoir2(option, rbi, vbi, wbi)
 		plot3(rbfx, rbfy, rbfz);
 		drawnow;
 		tf = tf + deltaT;
-		coup = coup_verification(rbf);
+		coup = coup_verification(rbi, rbf);
 	end
 	toc
 
-	coup
-	tf
-	rbf
-	vbf

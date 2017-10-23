@@ -1,13 +1,21 @@
-function coup = coup_verification(rbi)
+function coup = coup_verification(rbi, rbf)
 	rayon = 0.0199;
 
-	if (rbi(1)>=0-rayon && rbi(1)<1.37-rayon) && (rbi(2)>=0-rayon && rbi(2)<=1.525+rayon) && (rbi(3)<=0.76+rayon)
-		coup = 1;
-	elseif (rbi(1)>1.37+rayon && rbi(1)<=2.74-rayon) && (rbi(2)>=0-rayon && rbi(2)<=1.525+rayon) && (rbi(3)<=0.76+rayon)
-		coup = 0;
-	elseif (rbi(1)>=1.37-rayon && rbi(1)<=1.37+rayon) && (rbi(2)>=rayon-0.1525 && rbi(2)<=1.6775+rayon) && (rbi(3)>=0.76+rayon && rbi(3)<=0.9125+rayon)
+	if (rbf(1)>=0-rayon && rbf(1)<1.37-rayon) && (rbf(2)>=0-rayon && rbf(2)<=1.525+rayon) && (rbf(3)<=0.76+rayon)
+        if rbi(1) < 1.37
+            coup = 1;
+        else
+            coup = 0;
+        end
+	elseif (rbf(1)>1.37+rayon && rbf(1)<=2.74-rayon) && (rbf(2)>=0-rayon && rbf(2)<=1.525+rayon) && (rbf(3)<=0.76+rayon)
+		if rbi(1) < 1.37
+            coup = 0;
+        else
+            coup = 1;
+        end
+	elseif (rbf(1)>=1.37-rayon && rbf(1)<=1.37+rayon) && (rbf(2)>=rayon-0.1525 && rbf(2)<=1.6775+rayon) && (rbf(3)>=0.76+rayon && rbf(3)<=0.9125+rayon)
 		coup = 2;
-	elseif rbi(3)<=rayon
+	elseif rbf(3)<=rayon
 		coup = 3;
 	else
 		coup = -1;
