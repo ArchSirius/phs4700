@@ -1,4 +1,4 @@
-function Devoir2(option, rbi, vbi, wbi)
+function [coup, tf, rbf, vbf] = Devoir2(option, rbi, vbi, wbi)
 	deltaT = 0.001;
 
 	tf = 0;
@@ -36,4 +36,3 @@ function Devoir2(option, rbi, vbi, wbi)
 		coup = coup_verification(rbi, rbf);
 	end
 	toc
-
