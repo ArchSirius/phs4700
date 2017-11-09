@@ -14,9 +14,13 @@ function [Coll tf raf vaf rbf vbf] = Devoir2(rai, vai, rbi, vbi, tb)
 
 	tic
 	while Coll ~= 0 && (norm([raf(1); raf(2)]) >= minSpeed || norm([rbf(1); rbf(2)]) >= minSpeed)
-		qa = SEDRK4t0(qa, tf, deltaT, 'compute_break')		
+		qa = SEDRK4t0(qa, tf, deltaT, 'compute_break');	
 		raf(3) = raf(3) + vai(3) * deltaT;
-		...TODO determine collision
+		
+		if collision(raf, rbf) 
+			break; 
+		end
+		
 		if tf < tb
 			g = 'compute_run';
 		else
@@ -24,7 +28,11 @@ function [Coll tf raf vaf rbf vbf] = Devoir2(rai, vai, rbi, vbi, tb)
 			rbf(3) = rbf(3) + vbi(3) * deltaT;
 		end
 		qb = SEDRK4t0(qb, tf, deltaT, g);
-		...TODO determine collision
+		
+		if collision(raf, rbf) 
+                        break; 
+                end
+
 		tf = tf + deltaT;
 		raf = qa(1,:);
         	rbf = qb(1,:);

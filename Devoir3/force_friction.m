@@ -1,6 +1,7 @@
 function F_f = force_friction(m, v)
+	v
 	g = -9.8;
-	velocity = [v(1); v(2)];
+	velocity = [v(1); v(2)]
 	speed = norm(velocity);
 	mu = 0.075;
 	if speed < 50
