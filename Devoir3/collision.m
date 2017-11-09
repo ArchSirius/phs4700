@@ -5,7 +5,7 @@ function [isCollision] = collision(raf, rbf)
   angA = -raf(3);
 
   mbX = rbf(1);
-  mbY = rbf(1);
+  mbY = rbf(2);
   angB = -rbf(3);
   lonaX = 4.78 * 0.5;
   lonaY = 1.82 * 0.5;

@@ -1,6 +1,6 @@
 function [isCollision] = check_collision(system)
-  source = system(1:4,:)
-  incoming = system(5:8,:)
+  source = system(1:4,:);
+  incoming = system(5:8,:);
   
   minY = source(3, 2);
   maxY = source(2, 2);
