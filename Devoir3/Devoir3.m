@@ -1,5 +1,5 @@
 function [Coll tf raf vaf rbf vbf] = Devoir3(rai, vai, rbi, vbi, tb)
-	deltaT = 0.01;
+	deltaT = 0.002;
 	minSpeed = 0.01;
 
    	lona = [4.78*0.5 1.82*0.5];
@@ -15,7 +15,7 @@ function [Coll tf raf vaf rbf vbf] = Devoir3(rai, vai, rbi, vbi, tb)
 	qb = [rbf, vbf, [2; 0; 0]];
     
     axis manual;
-    axis([-20 200 -20 200]);
+    axis([-20 400 -20 400]);
 	tic
 	while (norm([vaf(1) vaf(2)]) >= minSpeed || norm([vbf(1) vbf(2)]) >= minSpeed)
 		rotated_positionA = rotated_position(raf, lona);
@@ -44,7 +44,7 @@ function [Coll tf raf vaf rbf vbf] = Devoir3(rai, vai, rbi, vbi, tb)
             qb = qb.';
 		    Coll = 0;
 		    break; 
-    		end
+    	end
 		
 		qa = SEDRK4t0(qa, tf, deltaT, 'compute_break');	
 		raf3 = raf(3) + vai(3) * deltaT;
