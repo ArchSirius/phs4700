@@ -9,7 +9,7 @@ function [isCollision, hits] = collision(angA, angB, rotatedA, rotatedB)
     systemB = rotate(angB, [rotatedB ; rotatedA]);
     [isCollision, hits] = check_collision(systemB, 1);
     if isCollision
-      hits = rotate(-andB, hits);
+      hits = rotate(-angB, hits);
     end
   end
     

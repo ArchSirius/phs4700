@@ -1,4 +1,4 @@
-function [isCollision, [xHit, yHit]] = check_collision(system, carNumber)
+function [isCollision, pointsCollisions] = check_collision(system, carNumber)
   source = system(1:4,:);
   incoming = system(5:8,:);
   
@@ -9,13 +9,35 @@ function [isCollision, [xHit, yHit]] = check_collision(system, carNumber)
   maxX = source(2, 1);
   
   isCollision = 0;
+  pointsCollisions = [[0 0]; [0 0]; [0 0]];
   for c = incoming.'
     x = c(1);
     y = c(2);
+    
     if x >= minX && x <= maxX && y >= minY && y <= maxY
+      distLeft = x - minX;
+      distRight = maxY - x;
+      distTop = maxY - y;
+      distBottom = y - minY;
+
+  
       isCollision = carNumber;
-      xHit = x;
-      yHit = y;
+      hit = [x y]; 
+      whichSide = min([distLeft, distRight, distTop, distBottom]);
+      if whichSide == distLeft
+        pointOfCollision1 = [minX minY];
+        pointOfCollision2 = [minX maxY];
+      elseif whichSide == distTop
+        pointOfCollision1 = [minX maxY];
+        pointOfCollision2 = [maxX maxY];
+      elseif whichSide == distRight
+        pointOfCollision1 = [maxX maxY];
+        pointOfCollision2 = [maxX minY];
+      elseif whichSide == distRight
+        pointOfCollision1 = [maxX minY];
+        pointOfCollision2 = [minX minY];
+      end
+      pointsCollisions = [hit; pointOfCollision1; pointOfCollision2];
       break;
     end
   end
