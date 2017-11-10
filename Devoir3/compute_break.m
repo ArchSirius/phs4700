@@ -1,7 +1,7 @@
 function k1 = compute_break(qi, deltaT)
 	qi = qi.';	
 	ri = qi(1,:);
-	vi = qi(2,:);
+	vi = qi(2,:)
 
 	if qi(3,1)==1
 		m = 1540;

@@ -1,4 +1,5 @@
 function k1 = compute_run(qi, deltaT)
+    qi = qi.';	
 	ri = qi(1,:);
 	vi = qi(2,:);
 	m = 1010;	

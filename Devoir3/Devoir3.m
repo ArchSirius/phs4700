@@ -14,10 +14,10 @@ function [Coll tf raf vaf rbf vbf] = Devoir3(rai, vai, rbi, vbi, tb)
 	qa = [raf, vaf, [1; 0; 0]];
 	qb = [rbf, vbf, [2; 0; 0]];
     
-    	axis manual;
-    	axis([-20 120 -20 120]);
+    axis manual;
+    axis([-20 200 -20 200]);
 	tic
-	while (norm([raf(1); raf(2)]) >= minSpeed || norm([rbf(1); rbf(2)]) >= minSpeed)
+	while (norm([vaf(1) vaf(2)]) >= minSpeed || norm([vbf(1) vbf(2)]) >= minSpeed)
 		rotated_positionA = rotated_position(raf, lona);
 		rotated_positionB = rotated_position(rbf, lonb);
 		xA = rotated_positionA(:, 1);
@@ -41,7 +41,7 @@ function [Coll tf raf vaf rbf vbf] = Devoir3(rai, vai, rbi, vbi, tb)
 		    qa(2,:) = qa2.';
 		    qb(2,:) = qb2.';
 		    qa = qa.';
-                    qb = qb.';
+            qb = qb.';
 		    Coll = 0;
 		    break; 
     		end
@@ -58,7 +58,7 @@ function [Coll tf raf vaf rbf vbf] = Devoir3(rai, vai, rbi, vbi, tb)
 		end
 		qb = SEDRK4t0(qb, tf, deltaT, g);
 		
-		tf = tf + deltaT;
+		tf = tf + deltaT
 	
 		qaPrime = qa.';
 		qbPrime = qb.';
@@ -69,7 +69,7 @@ function [Coll tf raf vaf rbf vbf] = Devoir3(rai, vai, rbi, vbi, tb)
 		rbf = qbPrime(1,:);
 		rbf(3) = rbf3;
 		vaf = qaPrime(2,:);
-		vbf = qbPrime(2,:);
+		vbf = qbPrime(2,:)
 	end
 	toc
 	qaPrime = qa.';
