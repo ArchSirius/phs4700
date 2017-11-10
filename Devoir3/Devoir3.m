@@ -33,12 +33,11 @@ function [Coll tf raf vaf rbf vbf] = Devoir2(rai, vai, rbi, vbi, tb)
 		pb = patch(xB, yB, 'yellow');
 		drawnow;
 		
-		if collision(raf(2), rbf(2), rotated_positionA, rotated_positionB)
-			...TODO VALEURS INSTANT APRES COLLISION
-			raf(2)
-			rbf(2)
-			break; 
-		end
+    [isCollision, hits] = collision(raf(2), rbf(2), rotated_positionA, rotated_positionB)
+    if (isCollision)
+      ...TODO VALEURS INSTANT APRES COLLISION
+      break; 
+    end
 		
 		qa = SEDRK4t0(qa, tf, deltaT, 'compute_break');	
 		raf3 = raf(3) + vai(3) * deltaT;

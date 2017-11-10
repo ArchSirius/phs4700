@@ -1,10 +1,15 @@
-function [isCollision] = collision(angA, angB, rotatedA, rotatedB)
+function [isCollision, hits] = collision(angA, angB, rotatedA, rotatedB)
   ... Angle en radiant selon les axes des x positif
   systemA = rotate(angA, [rotatedA ; rotatedB]);
-  isCollision = check_collision(systemA);
+  [isCollision, hits] = check_collision(systemA, 2);
 
-  if not(isCollision)
+  if isCollision
+    hits = rotate(-angA, hits);
+  else
     systemB = rotate(angB, [rotatedB ; rotatedA]);
-    isCollision = check_collision(systemB);
+    [isCollision, hits] = check_collision(systemB, 1);
+    if isCollision
+      hits = rotate(-andB, hits);
+    end
   end
     
