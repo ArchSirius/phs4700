@@ -33,7 +33,7 @@ function [Coll tf raf vaf rbf vbf] = Devoir3(rai, vai, rbi, vbi, tb)
 		pb = patch(xB, yB, 'yellow');
 		drawnow;
 		
-    		[isCollision, hits] = collision(raf(2), rbf(2), rotated_positionA, rotated_positionB);
+    	[isCollision, hits] = collision(raf(3), rbf(3), rotated_positionA, rotated_positionB);
 		if (isCollision)
 		    [qa2, qb2] = postCollision(raf, vaf, rbf, vbf, hits);
 		    qa = qa.';
