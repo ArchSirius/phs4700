@@ -1,7 +1,7 @@
 function k1 = compute_break(qi, deltaT)
 	qi = qi.';	
 	ri = qi(1,:);
-	vi = qi(2,:)
+	vi = qi(2,:);
 
 	if qi(3,1)==1
 		m = 1540;
@@ -9,7 +9,7 @@ function k1 = compute_break(qi, deltaT)
 		m = 1010;
 	else
 		error('Unwanted option exception')
-	end
+    end
 
 	F = force_friction(m, vi);
 	A = acceleration(F, m);

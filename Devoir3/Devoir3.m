@@ -48,6 +48,9 @@ function [Coll tf raf vaf rbf vbf] = Devoir3(rai, vai, rbi, vbi, tb)
 		
 		qa = SEDRK4t0(qa, tf, deltaT, 'compute_break');	
 		raf3 = raf(3) + vai(3) * deltaT;
+        if norm(qa(:,2)) < minSpeed
+            qa(:,2) = [0; 0; qa(3,2)];
+        end
 		
 		if tf < tb
 			g = 'compute_run';
@@ -57,6 +60,10 @@ function [Coll tf raf vaf rbf vbf] = Devoir3(rai, vai, rbi, vbi, tb)
 			rbf3 = rbf(3) + vbi(3) * deltaT;
 		end
 		qb = SEDRK4t0(qb, tf, deltaT, g);
+        if norm(qb(:,2)) < minSpeed
+            qb(:,2)
+            qb(:,2) = [0; 0; qb(3,2)]
+        end
 		
 		tf = tf + deltaT
 	
