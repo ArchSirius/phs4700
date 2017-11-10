@@ -1,4 +1,4 @@
-function [Coll tf raf vaf rbf vbf] = Devoir2(rai, vai, rbi, vbi, tb)
+function [Coll tf raf vaf rbf vbf] = Devoir3(rai, vai, rbi, vbi, tb)
 	deltaT = 0.01;
 	minSpeed = 0.01;
 
@@ -17,11 +17,11 @@ function [Coll tf raf vaf rbf vbf] = Devoir2(rai, vai, rbi, vbi, tb)
     	axis manual;
     	axis([-20 120 -20 120]);
 	tic
-	while Coll ~= 0 && (norm([raf(1); raf(2)]) >= minSpeed || norm([rbf(1); rbf(2)]) >= minSpeed)
+	while (norm([raf(1); raf(2)]) >= minSpeed || norm([rbf(1); rbf(2)]) >= minSpeed)
 		rotated_positionA = rotated_position(raf, lona);
 		rotated_positionB = rotated_position(rbf, lonb);
-		xA = rotated_positionA(:, 1)
-		yA = rotated_positionA(:, 2)
+		xA = rotated_positionA(:, 1);
+		yA = rotated_positionA(:, 2);
 		if exist('pa')
 		    delete(pa);
 		    delete(pb);
@@ -33,11 +33,18 @@ function [Coll tf raf vaf rbf vbf] = Devoir2(rai, vai, rbi, vbi, tb)
 		pb = patch(xB, yB, 'yellow');
 		drawnow;
 		
-    [isCollision, hits] = collision(raf(2), rbf(2), rotated_positionA, rotated_positionB)
-    if (isCollision)
-      ...TODO VALEURS INSTANT APRES COLLISION
-      break; 
-    end
+    		[isCollision, hits] = collision(raf(2), rbf(2), rotated_positionA, rotated_positionB);
+		if (isCollision)
+		    [qa2, qb2] = postCollision(raf, vaf, rbf, vbf, hits);
+		    qa = qa.';
+		    qb = qb.';
+		    qa(2,:) = qa2.';
+		    qb(2,:) = qb2.';
+		    qa = qa.';
+                    qb = qb.';
+		    Coll = 0;
+		    break; 
+    		end
 		
 		qa = SEDRK4t0(qa, tf, deltaT, 'compute_break');	
 		raf3 = raf(3) + vai(3) * deltaT;

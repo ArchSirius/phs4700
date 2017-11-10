@@ -3,7 +3,7 @@ function k1 = compute_run(qi, deltaT)
 	vi = qi(2,:);
 	m = 1010;	
 
-	R = position([ri(1); ri(2)], [vi(1); vi(2)]; [0;0], deltaT);
-	deltaR = [ri(1);ri(2)] - [ri(1); ri(2)];
+	R = position([ri(1); ri(2)], [vi(1); vi(2)], [0;0], deltaT);
+	deltaR = [R(1)-ri(1),R(2)-ri(2)];
 
-	k1 = [[deltaR; ri(3)]; [0; 0; vi(3)]; qi(3)];
+	k1 = [[deltaR, 0].' [0 0 0].' [0; 0; 0]];
