@@ -14,8 +14,10 @@ function [Coll tf raf vaf rbf vbf] = Devoir3(rai, vai, rbi, vbi, tb)
 	qa = [raf, vaf, [1; 0; 0]];
 	qb = [rbf, vbf, [2; 0; 0]];
 
+    figure;
     axis manual;
-    axis([-20 250 -20 120]);
+    axis([-20 120 -20 120]);
+    hold on;
 	tic
 	while (norm([vaf(1) vaf(2)]) >= minSpeed || norm([vbf(1) vbf(2)]) >= minSpeed)
 		rotated_positionA = rotated_position(raf, lona);
@@ -27,10 +29,12 @@ function [Coll tf raf vaf rbf vbf] = Devoir3(rai, vai, rbi, vbi, tb)
 		    delete(pb);
 		end
 		pa = patch(xA, yA, 'green');
+        cma = plot(raf(1), raf(2), '--.g');
 
 		xB = rotated_positionB(:, 1);
 		yB = rotated_positionB(:, 2);
 		pb = patch(xB, yB, 'yellow');
+        cmb = plot(rbf(1), rbf(2), '--.y');
 		drawnow;
 
     	[isCollision, hits] = collision(raf(3), rbf(3), rotated_positionA, rotated_positionB);
@@ -84,4 +88,6 @@ function [Coll tf raf vaf rbf vbf] = Devoir3(rai, vai, rbi, vbi, tb)
 		Coll = 0;
 	else
 		Coll = 1;
-	end
+    end
+
+    hold off;
