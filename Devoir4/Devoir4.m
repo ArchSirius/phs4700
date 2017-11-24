@@ -21,5 +21,15 @@ function [xi yi zi face] = Devoir4(nout, nin, poso)
 
 	thetaMinus = angle0 - angleAlpha;
 	thetaPlus = angle0 + angleAlpha;
-	phiMinus = 
-	phiPlus = 
+	
+	xyVect = [rCylindre*cos(angle0) rCynlindre*sin(angle0) 0];
+	topCylindre = mCylindre + [0 0 hCylindre/2] + xyVect;
+	bottomCylindre = mCylindre - [0 0 hCylindre/2] + xyVect;
+
+	zDiffBottom = poso(3) - bottomCylindre(3);
+	zDiffTop = topCylindre(3) - poso(3);
+	posInt = [poso(1) poso(2) poso(3)-zDiffBottom];
+	xyNorm = norm(bottomCylindre - posInt);
+
+	phiMinus = pi - atan(xyNorm/zDiffBottom); 
+	phiPlus = atan(xyNorm/zDiffTop);
