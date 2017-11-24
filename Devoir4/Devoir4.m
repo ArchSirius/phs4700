@@ -31,5 +31,21 @@ function [xi yi zi face] = Devoir4(nout, nin, poso)
 	posInt = [poso(1) poso(2) poso(3)-zDiffBottom];
 	xyNorm = norm(bottomCylindre - posInt);
 
-	phiMinus = pi - atan(xyNorm/zDiffBottom); 
-	phiPlus = atan(xyNorm/zDiffTop);
+	phiPlus = pi - atan(xyNorm/zDiffBottom); 
+	phiMinus = atan(xyNorm/zDiffTop);
+
+	for n = 1:N
+		for m = 1:M
+			theta = thetaMinus+(thetaPlus-thetaMinus)/(2*N)*(2*n-1);
+			phi = phiMinus+(phiPlus-phiMinus)/(2*M)*(2*m-1);
+			vecteur = [cos(theta) sin(theta) cos(phi)];
+			slope = vecteur(2)/vecteur(1);
+			yOrigin = vecteur(2) - vecteur(1)*slope;
+			[intersectx intersecty] = linecirc(slope, yOrigin, mCylindre(1), mCylindre(2), rCylindre);
+			if (!isnan(intersectx) && !isnan(intersecty))
+				...TODO 
+			end
+		end
+	end
+
+
