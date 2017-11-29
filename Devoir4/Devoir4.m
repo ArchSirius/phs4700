@@ -19,8 +19,8 @@ function [xi yi zi face] = Devoir4(nout, nin, poso)
 	normeVecteur0 = norm(vecteur0(1), vecteur0(2));
 	angleAlpha = asin(rCylindre / normeVecteur0);
 
-	thetaMinus = angle0 - angleAlpha;
-	thetaPlus = angle0 + angleAlpha;
+	phiMinus = angle0 - angleAlpha;
+	phiPlus = angle0 + angleAlpha;
 	
 	xyVect = [rCylindre*cos(angle0) rCylindre*sin(angle0) 0];
 	topCylindre = mCylindre + [0 0 hCylindre/2] + xyVect;
@@ -31,14 +31,14 @@ function [xi yi zi face] = Devoir4(nout, nin, poso)
 	posInt = [poso(1) poso(2) poso(3)-zDiffBottom];
 	xyNorm = norm(bottomCylindre - posInt);
 
-	phiPlus = pi - atan(xyNorm/zDiffBottom); 
-	phiMinus = atan(xyNorm/zDiffTop);
+	thetaPlus = pi - atan(xyNorm/zDiffBottom); 
+	thetaMinus = atan(xyNorm/zDiffTop);
 
 	for n = 1:N
 		for m = 1:M
-			theta = thetaMinus+(thetaPlus-thetaMinus)/(2*N)*(2*n-1);
-			phi = phiMinus+(phiPlus-phiMinus)/(2*M)*(2*m-1);
-			omega = [sin(theta)*cos(phi) sin(theta)*sin(phi) cos(theta)];
+			theta = thetaMinus+(thetaPlus-thetaMinus)/(2*N)*(2*n-1)
+			phi = phiMinus+(phiPlus-phiMinus)/(2*M)*(2*m-1)
+			omega = [sin(theta)*cos(phi) sin(theta)*sin(phi) cos(theta)]
 			[intersectx intersecty d]= LineCircle(omega, poso, mCylindre, rCylindre);
 			if (d == 2)
 				...TODO 
