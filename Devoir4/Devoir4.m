@@ -34,6 +34,7 @@ function [xi yi zi face] = Devoir4(nout, nin, poso)
 	thetaPlus = pi - atan(xyNorm/zDiffBottom); 
 	thetaMinus = atan(xyNorm/zDiffTop);
 
+	i = 0;
 	for n = 1:N
 		for m = 1:M
 			theta = thetaMinus+(thetaPlus-thetaMinus)/(2*N)*(2*n-1);
@@ -41,7 +42,11 @@ function [xi yi zi face] = Devoir4(nout, nin, poso)
 			omega = [sin(theta)*cos(phi) sin(theta)*sin(phi) cos(theta)];
 			[intersectx intersecty d]= LineCircle(omega, poso, mCylindre, rCylindre);
 			if (d == 2)
-				...TODO 
+				intersectxy = [intersectx intersecty];
+				[R d] = LineRectangle(omega, intersectxy, poso, hCylindre, mCylindre) 
+				if (d == 1)
+					i = i+1
+				end
 			end
 		end
 		
