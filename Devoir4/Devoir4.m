@@ -16,7 +16,7 @@ function [xi yi zi face] = Devoir4(nout, nin, poso)
 
 	vecteur0 = mCylindre - poso;
 	angle0 = atan2(vecteur0(2), vecteur0(1));
-	normeVecteur0 = norm(vecteur0(1), vecteur0(2));
+	normeVecteur0 = norm([vecteur0(1) vecteur0(2)]);
 	angleAlpha = asin(rCylindre / normeVecteur0);
 
 	phiMinus = angle0 - angleAlpha;
@@ -36,14 +36,13 @@ function [xi yi zi face] = Devoir4(nout, nin, poso)
 
 	for n = 1:N
 		for m = 1:M
-			theta = thetaMinus+(thetaPlus-thetaMinus)/(2*N)*(2*n-1)
-			phi = phiMinus+(phiPlus-phiMinus)/(2*M)*(2*m-1)
-			omega = [sin(theta)*cos(phi) sin(theta)*sin(phi) cos(theta)]
+			theta = thetaMinus+(thetaPlus-thetaMinus)/(2*N)*(2*n-1);
+			phi = phiMinus+(phiPlus-phiMinus)/(2*M)*(2*m-1);
+			omega = [sin(theta)*cos(phi) sin(theta)*sin(phi) cos(theta)];
 			[intersectx intersecty d]= LineCircle(omega, poso, mCylindre, rCylindre);
 			if (d == 2)
 				...TODO 
 			end
 		end
+		
 	end
-
-
