@@ -1,6 +1,6 @@
 function [xi yi zi face] = Devoir4(nout, nin, poso)
-	N = 100;
-	M = 100;
+	N = 10;
+	M = 10;
 
 	hCylindre = 0.18;
 	rCylindre = 0.02;
@@ -38,10 +38,9 @@ function [xi yi zi face] = Devoir4(nout, nin, poso)
 		for m = 1:M
 			theta = thetaMinus+(thetaPlus-thetaMinus)/(2*N)*(2*n-1);
 			phi = phiMinus+(phiPlus-phiMinus)/(2*M)*(2*m-1);
-			omega = [sin(theta)cos(phi) sin(theta)sin(phi) cos(theta)]
-			yOrigin = vecteur(2) - vecteur(1)*slope;
-			[intersectx intersecty] = LineCircle(omega, poso, mCylindre, rCylindre)
-			if (~isnan(intersectx) && ~isnan(intersecty))
+			omega = [sin(theta)*cos(phi) sin(theta)*sin(phi) cos(theta)];
+			[intersectx intersecty d]= LineCircle(omega, poso, mCylindre, rCylindre);
+			if (d == 2)
 				...TODO 
 			end
 		end

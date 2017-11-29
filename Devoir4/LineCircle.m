@@ -17,7 +17,7 @@ function [x y d] = LineCircle(omega, poso, mCylindre, rCylindre)
 		d=0;
 		x = NaN;
 		y = NaN;
-	else if D==0 
+	elseif D==0 
 		d=1;
 		x = -B/2*A;
 		y = m*x + c;
