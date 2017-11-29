@@ -1,22 +1,43 @@
-function [x y] = LineCircle(slope, yOrigin, mCylindre, rCylindre)	
-
-	d1 = [0 yOrigin] - [mCylindre(1) mCylindre(2)];
-	d2 = [1 yOrigin+slope] - [mCylindre(1) mCylindre(2)];
-	
-	dx = d2(1) - d1(1);
-	dy = d2(2) - d1(2);
-	dr = sqrt(dx^2 + dy^2);
-	D = d1(1) * d2(2) - d2(1) * d1(2);
-
-	dySign = 1;
-	if (dy < 0) 
-		dySign = -1;
+function [x y d] = LineCircle(omega, poso, mCylindre, rCylindre)	
+	if omega(1) ~= 0 
+		m = omega(2)/omega(1);
+	else 
+		m = inf;
 	end
 
-	xPlus  = (D * dy + dySign * dx * sqrt(rCylindre^2 * dr^2 - D^2) / dr^2);
-	xMinus = (D * dy - dySign * dx * sqrt(rCylindre^2 * dr^2 - D^2) / dr^2);
-	yPlus  = (-D * dy + abs(dy) * sqrt(rCylindre^2 * dr^2 - D^2) / dr^2);
-	yMinus = (-D * dy - abs(dy) * sqrt(rCylindre^2 * dr^2 - D^2) / dr^2);
+	c = omega(2) - m * omega(1);
+	
+	A = m^2 + 1;
+	B = 2*(m*c - m*mCylindre(2) - mCylindre(1));
+	C = mCylindre(1)^2 + mCylindre(2)^2 - 2*c*mCylindre(2) - rCylindre^2;
 
-	x = xPlus;
-	y = yPlus;
+	D = B^2 - 4*A*C;
+
+	if D<0 
+		d=0;
+		x = NaN;
+		y = NaN;
+	else if D==0 
+		d=1;
+		x = -B/2*A;
+		y = m*x + c;
+	else 
+		d=2;
+		x1 = (-B+sqrt(D))/2*A;
+		x2 = (-B-sqrt(D))/2*A;
+		y1 = m*x1 + c;
+		y2 = m*x2 + c;
+
+		r1 = [x1 y1] - [poso(1) poso(2)];
+		r2 = [x2 y2] - [poso(1) poso(2)];
+
+		if norm(r1) < norm(r2) 
+			x = x1;
+			y = y1;
+		else 
+			x = x2;
+			y = y2;
+		end
+	end
+
+
