@@ -1,4 +1,4 @@
-function [x y d] = LineCircle(omega, poso, mCylindre, rCylindre)	
+function [x y d] = LineCircle(omega, poso, mCylindre, rCylindre, normeCourte)	
 	if omega(1) ~= 0 
 		m = omega(2)/omega(1);
 	else 
@@ -31,13 +31,13 @@ function [x y d] = LineCircle(omega, poso, mCylindre, rCylindre)
 		r1 = [x1 y1] - [poso(1) poso(2)];
 		r2 = [x2 y2] - [poso(1) poso(2)];
 
-		if norm(r1) < norm(r2) 
-			x = x1;
-			y = y1;
-		else 
-			x = x2;
-			y = y2;
-		end
+			if ((norm(r1) < norm(r2) && normeCourte) || (norm(r1) > norm(r2) && ~normeCourte)) 
+				x = x1;
+				y = y1;
+			else 
+				x = x2;
+				y = y2;
+			end
 	end
 
 

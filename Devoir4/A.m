@@ -1,43 +1,41 @@
-function [collision] =  A(r0, w0, mCylindre, hCylindre, rCylindre, n_in, n_out)
- 
-  %% Calul de la normal du plan xy
-  c = mCylindre(1:2);
-  
-    %% Calcul de la normal du plan zy
-  low_x = mCylindre(1) - rCylindre;
-  high_x = mCylindre(1) + rCylindre;
-  
-  low_y = mCylindre(2) 
-  
+function [collision] =  A(r, w0, mCylindre, hCylindre, rCylindre, n_in, n_out)
   low_z = mCylindre(3) - 0.5 * hCylindre;
   high_z  = mCylindre(3) + 0.5 * hCylindre;
 
-  x = r0(1);
-  z = r0(3);
+  z = r(3);
   % bottom or top 
-  if (z == low_z):
-    normal_xy = [0 0 0];
-    normal_zx = [0 0 -1];
-    normal_zy = [0 0 -1];
-  if (z == high_z): 
-    normal_xy = [0 0 0];
-    normal_zx = [0 0 1];
-    normal_zy = [0 0 1];
-  else:
-    normale_xy = [c(1) - r(1) c(2) - r(2) 0];
-    normal_zx = [0 1 0];
-    normal_zy = [1 0 0];
+  if (z == low_z)
+    normal = [0 0 -1];
+  elseif (z == high_z) 
+    normal = [0 0 1];
+  else
+    normal = [mCylindre(1) - r(1) mCylindre(2) - r(2) 0];
   end
   
   %% Calcul de l'angle d'incidence
   % Si ca ner marche pas, regarder w0 (peut etre enelver une dimension).
   % Regarder aussi pi. Peut etre ne doit pas etre mis
-  theta_in = pi - acos(dot(w0,normale_xy) / (norm(w0) * norm(normale_xy)));
-  theta_out_xy = asin(n_in * sin(theta_in) / n_out);
-  theta_in = pi - acos(dot(w0,normale_zx) / (norm(w0) * norm(normale_zx)));
-  theta_out_zx = asin(n_in * sin(theta_in) / n_out);
-  theta_in = pi - acos(dot(w0,normale_zy) / (norm(w0) * norm(normale_zy)));
-  theta_out_zy = asin(n_in * sin(theta_in) / n_out);
+  w0_xy = w0(1:2);
+  normal_xy = normal(1:2);
+  theta_out = 0;
+  if (norm(w0_xy) ~= 0 || norm(normal_xy) ~= 0)
+    theta_in = acos(dot(w0_xy,normal_xy) / (norm(w0_xy) * norm(normal_xy)));
+    theta_out = asin(n_in * sin(theta_in) / n_out);
+  end
 
+  w0_xz = [w0(1) w0(3)];
+  normal_xz = [normal(1) normal(3)];
+  phi_out = 0;
+  if (norm(w0_xz) ~= 0 || norm(normal_xz) ~= 0)
+    phi_in = acos(dot(w0_xz,normal_xz) / (norm(w0_xz) * norm(normal_xz)));
+    phi_out = asin(n_in * sin(theta_in) / n_out);
+  end
 
+  ux = cos(phi_out);
+  uz = sin(phi_out);
+  vy = cos(theta_out);
+  vx = sin(theta_out);
 
+  w1 = [ux + vx vy uz];
+  LineCircle(w1, r, mCylindre, rCylindre, 0);
+  collision = NaN;

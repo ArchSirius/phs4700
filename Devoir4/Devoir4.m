@@ -15,14 +15,14 @@ function [xi yi zi face] = Devoir4(nout, nin, poso)
 	z2Cube = 17;
 
 	vecteur0 = mCylindre - poso;
-	angle0 = atan2(vecteur0(2), vecteur0(1));
+	angleAlpha = atan2(vecteur0(2), vecteur0(1));
 	normeVecteur0 = norm([vecteur0(1) vecteur0(2)]);
-	angleAlpha = asin(rCylindre / normeVecteur0);
+	angleBeta = asin(rCylindre / normeVecteur0);
 
-	phiMinus = angle0 - angleAlpha;
-	phiPlus = angle0 + angleAlpha;
+	phiMinus = angleAlpha - angleBeta;
+	phiPlus = angleAlpha + angleBeta;
 	
-	xyVect = [rCylindre*cos(angle0) rCylindre*sin(angle0) 0];
+	xyVect = [rCylindre*cos(angleAlpha) rCylindre*sin(angleAlpha) 0];
 	topCylindre = mCylindre + [0 0 hCylindre/2] + xyVect;
 	bottomCylindre = mCylindre - [0 0 hCylindre/2] + xyVect;
 
@@ -40,12 +40,13 @@ function [xi yi zi face] = Devoir4(nout, nin, poso)
 			theta = thetaMinus+(thetaPlus-thetaMinus)/(2*N)*(2*n-1);
 			phi = phiMinus+(phiPlus-phiMinus)/(2*M)*(2*m-1);
 			omega = [sin(theta)*cos(phi) sin(theta)*sin(phi) cos(theta)];
-			[intersectx intersecty d]= LineCircle(omega, poso, mCylindre, rCylindre);
-			if (d == 2)
+			[intersectx intersecty d]= LineCircle(omega, poso, mCylindre, rCylindre, 1);
+			if (d ~= 0)
 				intersectxy = [intersectx intersecty];
 				[R d] = LineRectangle(omega, intersectxy, poso, hCylindre, mCylindre) 
 				if (d == 1)
 					i = i+1
+					temp = A(R, omega, mCylindre, hCylindre, rCylindre, nin, nout)
 				end
 			end
 		end
