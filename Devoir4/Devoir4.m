@@ -45,8 +45,8 @@ function [xi yi zi face] = Devoir4(nout, nin, poso)
 				intersectxy = [intersectx intersecty];
 				[R d] = LineRectangle(omega, intersectxy, poso, hCylindre, mCylindre) 
 				if (d == 1)
-					i = i+1
-					temp = A(R, omega, mCylindre, hCylindre, rCylindre, nin, nout)
+					i = i+1;
+					[w1, isRefracted] = Refraction(R, omega, mCylindre, hCylindre, rCylindre, nin, nout)
 				end
 			end
 		end
