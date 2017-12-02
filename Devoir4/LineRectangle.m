@@ -1,4 +1,4 @@
-function [R d] = LigneRectangle(omega, intersectxy, poso, hCylindre, mCylindre, rCylindre)
+function [R d] = LineRectangle(omega, intersectxy, poso, hCylindre, mCylindre, rCylindre)
 	omega = omega	
 	if omega(1) ~= 0
 		t = (intersectxy(1) - poso(1)) / omega(1);
@@ -25,7 +25,7 @@ function [R d] = LigneRectangle(omega, intersectxy, poso, hCylindre, mCylindre, 
 
 		norm_xy = norm(r(1:2)-mCylindre(1:2))
 
-		if norm(r(1:2)-mCylindre(1:2))<rCylindre
+		if norm(r(1:2)-mCylindre(1:2))<rCylindre && t>0
 			R = r;
 			d = 1;
 		else
