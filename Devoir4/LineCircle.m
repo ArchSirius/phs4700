@@ -5,11 +5,11 @@ function [x y d] = LineCircle(omega, poso, mCylindre, rCylindre, normeCourte)
 		m = inf;
 	end
 
-	c = omega(2) - m * omega(1);
+	c = poso(2) - m*poso(1);
 	
 	A = m^2 + 1;
 	B = 2*(m*c - m*mCylindre(2) - mCylindre(1));
-	C = mCylindre(1)^2 + mCylindre(2)^2 - 2*c*mCylindre(2) - rCylindre^2;
+	C = mCylindre(1)^2 + mCylindre(2)^2 - 2*c*mCylindre(2) - rCylindre^2 + c^2;
 
 	D = B^2 - 4*A*C;
 
@@ -19,12 +19,12 @@ function [x y d] = LineCircle(omega, poso, mCylindre, rCylindre, normeCourte)
 		y = NaN;
 	elseif D==0 
 		d=1;
-		x = -B/2*A;
+		x = -B/(2*A);
 		y = m*x + c;
 	else 
 		d=2;
-		x1 = (-B+sqrt(D))/2*A;
-		x2 = (-B-sqrt(D))/2*A;
+		x1 = (-B+sqrt(D))/(2*A);
+		x2 = (-B-sqrt(D))/(2*A);
 		y1 = m*x1 + c;
 		y2 = m*x2 + c;
 
@@ -39,5 +39,5 @@ function [x y d] = LineCircle(omega, poso, mCylindre, rCylindre, normeCourte)
 				y = y2;
 			end
 	end
-
+	SURLERAYON = norm([x y]-mCylindre(1:2))
 

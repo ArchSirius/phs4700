@@ -1,4 +1,4 @@
-function [w1, isRefracted] =  Refraction(r, w0, mCylindre, hCylindre, rCylindre, n_in, n_out)
+function [w1, isRefracted] =  Refraction(r, w0, mCylindre, hCylindre, n_in, n_out)
   low_z = mCylindre(3) - 0.5 * hCylindre;
   high_z  = mCylindre(3) + 0.5 * hCylindre;
   z = r(3);

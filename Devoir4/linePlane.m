@@ -1,7 +1,8 @@
-function [isCollision, vecteur_resultant] = intersectLinePlane(r0, w0, v1, v2)
-  top = minX - dot(n, r0);
+function [isCollision vecteur_resultant] = linePlane(r0, v, n, point, minX, maxX, minY, maxY, minZ, maxZ)
+  epsilon = 1e-10
+  top = dot(n, point) - dot(n, r0);
   bottom = dot(v, n);
-  t = top / botoom;
+  t = top / bottom;
   
   vecteur_resultant = r0 + t*v;
   
@@ -9,13 +10,15 @@ function [isCollision, vecteur_resultant] = intersectLinePlane(r0, w0, v1, v2)
   y = vecteur_resultant(2);
   z = vecteur_resultant(3);
 
-  is_collision = true;
-  if (x < minX || x > maxX) 
+  isCollision = true;
+  if (x < minX - epsilon || x > maxX + epsilon)
     isCollision = false;
   end
-  if (y < minY || y > maxY) 
+  if (y < minY - epsilon || y > maxY + epsilon)
+    'y'
     isCollision = false;
   end
-  if (z < minZ || z > maxZ)
-     isCollision = false;
+  if (z < minZ - epsilon || z > maxZ + epsilon)
+    'z'
+    isCollision = false;
   end

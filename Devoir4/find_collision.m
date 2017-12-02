@@ -1,8 +1,10 @@
 function [collision face r] = find_collision(r0, v0, count, mCylindre, hCylindre, rCylindre, n_in, n_out)
+n_in = n_in	
+n_out2 = n_out
   if count == 0
-    v = Refraction(r0, v0, mCylindre, hCylindre, n_in, n_out);
+    v = Refraction(r0, v0, mCylindre, hCylindre, rCylindre, n_in, n_out);
   else
-    v = Refraction(r0, v0, mCylindre, hCylindre, n_out, n_in);
+    v = Refraction(r0, v0, mCylindre, hCylindre, rCylindre, n_out, n_in);
   end
 
   [collision face r] = LineBox(r0, v)
