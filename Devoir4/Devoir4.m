@@ -16,7 +16,7 @@ function [xi yi zi face] = Devoir4(nout, nin, poso)
 	
 	top = mCylindre + [rCylindre*cos(pi+angleAlpha) rCylindre*sin(pi+angleAlpha) hCylindre/2];
 	bottom = mCylindre + [rCylindre*cos(pi+angleAlpha) rCylindre*sin(pi+angleAlpha) -hCylindre/2];
-
+ 
 	if poso(3) < mCylindre(3)-hCylindre/2
 		bottom = mCylindre + [rCylindre*cos(angleAlpha) rCylindre*sin(angleAlpha) -hCylindre/2];
 	elseif poso(3) > mCylindre(3)+hCylindre/2
@@ -27,9 +27,7 @@ function [xi yi zi face] = Devoir4(nout, nin, poso)
 	vectBottom = bottom - poso;
 
 	angleTop = atan2(vectTop(3), norm([vectTop(1) vectTop(2)]))
-	angleTop2 = atan2(vectTop(3), vectTop(2))
 	angleBottom = atan2(vectBottom(3), norm([vectBottom(1) vectBottom(2)]))
-	angleBottom2 = atan2(vectBottom(3), vectBottom(2))
 
 	thetaPlus =  pi/2 - angleBottom
 	thetaMinus =  pi/2 - angleTop
@@ -48,7 +46,7 @@ function [xi yi zi face] = Devoir4(nout, nin, poso)
 			if (d ~= 0)
 				j = j+1
 				intersectxy = [intersectx intersecty];
-				[R d] = LineRectangle(omega, intersectxy, poso, hCylindre, mCylindre, rCylindre) 
+				[R d] = LineRectangle(omega, intersectxy, poso, hCylindre, mCylindre, rCylindre, true) 
 				if d 
 					i = i+1
 				end
