@@ -3,6 +3,6 @@ function [collision r] = LineCylinder(r0, v0, hCylindre, mCylindre, rCylindre, n
   collision = 0;
   if d
     intersectxy = [x y];
-    [r collision] = LigneRectangle(v0, intersectxy, r0, hCylindre, mCylindre, rCylindre);
+    [r collision] = LineRectangle(v0, intersectxy, r0, hCylindre, mCylindre, rCylindre);
   end
   

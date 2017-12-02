@@ -18,37 +18,39 @@ function [collision, face, r] = LineBox(r0, w0)
   face = 0;
   r = [0 0 0];
   collision = false;
-  if is_collisiion1 && norm(r0, r1) < minR
+  r0
+  r1
+  if is_collision1 && norm(r0, r1) < minR
     minR = norm(r0, r1);
     collision = true;
     face = 1;
     r = r1;
   end
-  if is_collisiion2 && norm(r0, r2) < minR
+  if is_collision2 && norm(r0, r2) < minR
     minR = norm(r0, r2);
     collision = true;
     face = 2;
     r = r2;
   end
-  if is_collisiion3 && norm(r0, r3) < minR
+  if is_collision3 && norm(r0, r3) < minR
     minR = norm(r0, r3);
     collision = true;
     face = 3;
     r = r3;
   end
-  if is_collisiion4 && norm(r0, r4) < minR
+  if is_collision4 && norm(r0, r4) < minR
     minR = norm(r0, r4);
     collision = true;
     face = 4;
     r = r4;
   end
-  if is_collisiion5 && norm(r0, r5) < minR
+  if is_collision5 && norm(r0, r5) < minR
     minR = norm(r0, r5);
     collision = true;
     face = 5;
     r = r5;
   end
-  if is_collisiion6 && norm(r0, r6) < minR
+  if is_collision6 && norm(r0, r6) < minR
     minR = norm(r0, r6);
     collision = true;
     face = 6;

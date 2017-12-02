@@ -45,7 +45,7 @@ function [xi yi zi face] = Devoir4(nout, nin, poso)
 				intersectxy = [intersectx intersecty];
 				[R d] = LineRectangle(omega, intersectxy, poso, hCylindre, mCylindre, rCylindre);
 				if d 
-					%[collision, iFace, r] = find_collision(R, omega, 0, mCylindre, hCylindre, rCylindre, nin, nout)
+					[collision, iFace, r] = find_collision(R, omega, 0, mCylindre, hCylindre, rCylindre, nin, nout)
 					collision = 0;
 					if collision
 						xi = [xi; r(1)];
