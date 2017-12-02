@@ -39,5 +39,4 @@ function [x y d] = LineCircle(omega, poso, mCylindre, rCylindre, normeCourte)
 				y = y2;
 			end
 	end
-	SURLERAYON = norm([x y]-mCylindre(1:2))
 

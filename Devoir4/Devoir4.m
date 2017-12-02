@@ -37,23 +37,18 @@ function [xi yi zi face] = Devoir4(nout, nin, poso)
 	zi = [];
 	face = [];
 
-	i = 0;
-	j = 0;
 	for n = 1:N
 		for m = 1:M
-			theta = thetaMinus+(thetaPlus-thetaMinus)/(2*N)*(2*n-1)
-			phi = phiMinus+(phiPlus-phiMinus)/(2*M)*(2*m-1)
-			omega = [sin(theta)*cos(phi) sin(theta)*sin(phi) cos(theta)]
+			theta = thetaMinus+(thetaPlus-thetaMinus)/(2*N)*(2*n-1);
+			phi = phiMinus+(phiPlus-phiMinus)/(2*M)*(2*m-1);
+			omega = [sin(theta)*cos(phi) sin(theta)*sin(phi) cos(theta)];
 			[intersectx intersecty d]= LineCircle(omega, poso, mCylindre, rCylindre, 1);
 			if (d ~= 0)
-				j = j+1
 				intersectxy = [intersectx intersecty];
-				[R d] = LineRectangle(omega, intersectxy, poso, hCylindre, mCylindre, rCylindre) 
+				[R d] = LineRectangle(omega, intersectxy, poso, hCylindre, mCylindre, rCylindre);
 				if d 
-					i = i+1
-					nout1 = nout
-					[collision, iFace, r] = find_collision(R, omega, 0, mCylindre, hCylindre, rCylindre, nin, nout)
-					collision = 0
+					%[collision, iFace, r] = find_collision(R, omega, 0, mCylindre, hCylindre, rCylindre, nin, nout)
+					collision = 0;
 					if collision
 						xi = [xi; r(1)];
 						yi = [yi; r(2)];
@@ -65,8 +60,6 @@ function [xi yi zi face] = Devoir4(nout, nin, poso)
 		end
 		
 	end
-	i=i
-	j=j
 
 	Division = 18;
 	n = 2*pi/Division;
@@ -85,7 +78,7 @@ function [xi yi zi face] = Devoir4(nout, nin, poso)
 	  drawnow;
 	end	
 
-	for i = 1:lenght(xi)
+	for i = 1:length(xi)
 		if face(i)==1
 			lineSpec = '.r';
 		elseif face(i)==2
