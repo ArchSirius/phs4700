@@ -8,7 +8,7 @@ function [collision face r] = find_collision(r0, v0, count, mCylindre, hCylindre
   [collision face r] = LineBox(r0, v)
   if ~collision
     [collision, r] = LineCylinder(r0, v0, hCylindre, mCylindre, rCylindre, count)
-    if collision && count < 100
+    if collision && count <= 100
       [collision face r] =find_collision(r, r - r0, count + 1, mCylindre, hCylindre, rCylindre, n_in, n_out)
     end
   end
