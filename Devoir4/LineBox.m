@@ -18,8 +18,6 @@ function [collision, face, r] = LineBox(r0, w0)
   face = 0;
   r = [0 0 0];
   collision = false;
-  r0
-  r1
   if is_collision1 && norm(r0, r1) < minR
     minR = norm(r0, r1);
     collision = true;

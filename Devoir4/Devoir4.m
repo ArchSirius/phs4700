@@ -26,14 +26,17 @@ function [xi yi zi face] = Devoir4(nout, nin, poso)
 	vectTop = top - poso;
 	vectBottom = bottom - poso;
 
-	angleTop = atan2(vectTop(3), norm([vectTop(1) vectTop(2)]))
-	angleBottom = atan2(vectBottom(3), norm([vectBottom(1) vectBottom(2)]))
+	angleTop = atan2(vectTop(3), norm([vectTop(1) vectTop(2)]));
+	angleBottom = atan2(vectBottom(3), norm([vectBottom(1) vectBottom(2)]));
 
-	thetaPlus =  pi/2 - angleBottom
-	thetaMinus =  pi/2 - angleTop
+	thetaPlus =  pi/2 - angleBottom;
+	thetaMinus =  pi/2 - angleTop;
 
-	hits = []
-
+	hits = [];
+	xi = [];
+	yi = [];
+	zi = [];
+	face = [];
 
 	for n = 1:N
 		for m = 1:M
@@ -45,8 +48,7 @@ function [xi yi zi face] = Devoir4(nout, nin, poso)
 				intersectxy = [intersectx intersecty];
 				[R d] = LineRectangle(omega, intersectxy, poso, hCylindre, mCylindre, rCylindre);
 				if d 
-					[collision, iFace, r] = find_collision(R, omega, 0, mCylindre, hCylindre, rCylindre, nin, nout)
-					collision = 0;
+					[collision, iFace, r] = find_collision(R, omega, 0, mCylindre, hCylindre, rCylindre, nin, nout);
 					if collision
 						xi = [xi; r(1)];
 						yi = [yi; r(2)];

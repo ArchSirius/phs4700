@@ -16,7 +16,6 @@ function [w1, isRefracted] =  Refraction(r, w0, mCylindre, hCylindre, n_in, n_ou
   normal_xy = normal(1:2);
   phi_out = 0;
   if (norm(w0_xy) ~= 0 && norm(normal_xy) ~= 0)
-tmp = dot(w0_xy,normal_xy) / (norm(w0_xy) * norm(normal_xy))	
     phi_in = acos(dot(w0_xy,normal_xy) / (norm(w0_xy) * norm(normal_xy) + 1e-10));
     phi_out = asin(n_in * sin(phi_in) / n_out);
   end

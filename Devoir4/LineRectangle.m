@@ -30,8 +30,8 @@ function [R d] = LineRectangle(omega, intersectxy, poso, hCylindre, mCylindre, r
 	%	d = 1;
  	%else 
   if ~d
-    isOut 
-		if omega(3)>0 && isOut || omega(3)<0 && ~isOut
+    %isOut 
+		if omega(3)>0 || omega(3)<0 
 			z = mCylindre(3)-hCylindre/2;
 		else
 			z = mCylindre(3)+hCylindre/2;
@@ -41,12 +41,10 @@ function [R d] = LineRectangle(omega, intersectxy, poso, hCylindre, mCylindre, r
 		r = poso + t*omega;
 
 		if norm(R(1:2)-mCylindre(1:2))<rCylindre
-			R = r;
-			d = 1;
+		  R = r;
+		  d = 1;
 		else
-      x
-      y
-			R = NaN;
-			d = 0;
+		  R = NaN;
+		  d = 0;
 		end
 	end	
