@@ -29,7 +29,8 @@ function [w1, isRefracted] =  Refraction(r, w0, mCylindre, hCylindre, n_in, n_ou
     theta_out = -theta_out;
   end
 
-  w1 = [sin(theta_out)*cos(pi-phi_out) sin(theta_out)*sin(pi-phi_out) cos(theta_out)];
+  angleNormal_xy = atan2(normal(2), normal(1));
+  w1 = [sin(theta_out)*cos(pi-phi_out+angleNormal_xy) sin(theta_out)*sin(pi-phi_out+angleNormal_xy) cos(theta_out)];
   isRefracted = 1;
   if abs(phi_out)>(pi/2) || abs(theta_out)>(pi/2)
 	  isRefracted = 0;
