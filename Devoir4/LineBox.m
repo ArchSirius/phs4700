@@ -30,7 +30,7 @@ function [collision, face, r] = LineBox(r0, w0)
     r = r2;
   end
   if is_collision3 &&norm(r3 - r0) < minT
-    minT = norm(r3 - r0)
+    minT = norm(r3 - r0);
     collision = true;
     face = 3;
     r = r3;
@@ -42,13 +42,13 @@ function [collision, face, r] = LineBox(r0, w0)
     r = r4;
   end
   if is_collision5 &&norm(r5 - r0) < minT
-    minT = norm(r5 - r0) 
+    minT = norm(r5 - r0);
     collision = true;
     face = 5;
     r = r5;
   end
   if is_collision6 && norm(r6 - r0) < minT
-    minT = norm(r6 - r0) 
+    minT = norm(r6 - r0);
     collision = true;
     face = 6;
     r = r6;

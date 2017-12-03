@@ -23,23 +23,19 @@ function [w1, isRefracted] =  Refraction(r, w0, mCylindre, hCylindre, n_in, n_ou
   w0_xz = [w0(1) w0(3)]; 
   normal_xz = [normal(1) normal(3)];
   theta_in = acos(dot(w0_xz,normal_xz) / (norm(w0_xz) * norm(normal_xz) + 1e-10));
-  in = n_in * sin(theta_in) / n_out;
-  if in > 0
-    %% TODO gerer la reflextion totale interne
-  else
-    theta_out = asin(in);
-    if w0(3) < 0
-      theta_out = -theta_out;
-    end
+  % TODO gerer reflextion total interne
+  theta_out = asin(n_in * sin(theta_in) / n_out);
 
-    angleNormal_xy = atan2(normal(2), normal(1)); 
-    w1 = [sin(theta_out)*cos(phi_out) sin(theta_out)*sin(phi_out) cos(theta_out)];
-    w1 = [w1(1)+cos(angleNormal_xy) w1(2)+sin(angleNormal_xy) w1(3)];
-
-    isRefracted = 1;
-    if abs(phi_out)>(pi/2) || abs(theta_out)>(pi/2)
-      isRefracted = 0;
-    end
+  if w0(3) < 0
+    theta_out = -theta_out;
   end
 
+  angleNormal_xy = atan2(normal(2), normal(1)); 
+  w1 = [sin(theta_out)*cos(phi_out) sin(theta_out)*sin(phi_out) cos(theta_out)];
+  w1 = [w1(1)+cos(angleNormal_xy) w1(2)+sin(angleNormal_xy) w1(3)];
+
+  isRefracted = 1;
+  if abs(phi_out)>(pi/2) || abs(theta_out)>(pi/2)
+	  isRefracted = 0;
+  end
 
