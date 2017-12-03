@@ -1,6 +1,6 @@
 function [xi yi zi face] = Devoir4(nout, nin, poso)
-	N = 5;
-	M = 5;
+	N = 100;
+	M = 100;
 
 	hCylindre = 0.18;
 	rCylindre = 0.02;
@@ -46,7 +46,7 @@ function [xi yi zi face] = Devoir4(nout, nin, poso)
 			[intersectx intersecty d]= LineCircle(omega, poso, mCylindre, rCylindre, 1);
 			if (d ~= 0)
 				intersectxy = [intersectx intersecty];
-				[R d] = LineRectangle(omega, intersectxy, poso, hCylindre, mCylindre, rCylindre);
+				[R d] = LineRectangle(omega, intersectxy, poso, hCylindre, mCylindre, rCylindre, 1);
 				if d 
 					[collision, iFace, r] = find_collision(R, omega, 0, mCylindre, hCylindre, rCylindre, nin, nout);
 					if collision
@@ -60,38 +60,38 @@ function [xi yi zi face] = Devoir4(nout, nin, poso)
 		end
 		
 	end
-	Division = 18;
-	n = 2*pi/Division;
-
-	for i = 0:n-1
-	  current = mCylindre + [rCylindre*cos(i*n) rCylindre*sin(i*n) 0];
-	  currentTop = current + [0 0 hCylindre/2];
-	  currentBottom = current - [0 0 hCylindre/2];
-	  next = mCylindre + [rCylindre*cos(i*(n+1)) rCylindre*sin(i*(n+1))];
-	  nextTop = next + [0 0 hCylindre/2];
-          nextBottom = next - [0 0 hCylindre/2];
-	  
-	  plot3([currentTop(1) currentBottom(1)], [currentTop(2) currentBottom(2)], [currentTop(3) currentBottom(3)]);
-	  plot3([currentTop(1) nextTop(1)], [currentTop(2) nextTop(2)], [currentTop(3) nextTop(3)]);
-	  plot3([currentBottom(1) nextBottom(1)], [currentBottom(2) nextBottom(2)], [currentBottom(3) nextBottom(3)]);
-	  drawnow;
-	end	
-
-	for i = 1:length(xi)
-		if face(i)==1
-			lineSpec = '.r';
-		elseif face(i)==2
-                        lineSpec = '.c';
-		elseif face(i)==3
-                        lineSpec = '.g';
-		elseif face(i)==4
-                        lineSpec = '.y';
-		elseif face(i)==5
-                        lineSpec = '.b';
-		elseif face(i)==6
-                        lineSpec = '.m';
-		end
-		plot3(xi(i), yi(i), zi(i), lineSpec);
-		drawnow;
-	end
-
+%	Division = 18;
+%	n = 2*pi/Division;
+%
+%	for i = 0:n-1
+%	  current = mCylindre + [rCylindre*cos(i*n) rCylindre*sin(i*n) 0];
+%	  currentTop = current + [0 0 hCylindre/2];
+%	  currentBottom = current - [0 0 hCylindre/2];
+%	  next = mCylindre + [rCylindre*cos(i*(n+1)) rCylindre*sin(i*(n+1))];
+%	  nextTop = next + [0 0 hCylindre/2];
+%          nextBottom = next - [0 0 hCylindre/2];
+%	  
+%	  plot3([currentTop(1) currentBottom(1)], [currentTop(2) currentBottom(2)], [currentTop(3) currentBottom(3)]);
+%	  plot3([currentTop(1) nextTop(1)], [currentTop(2) nextTop(2)], [currentTop(3) nextTop(3)]);
+%	  plot3([currentBottom(1) nextBottom(1)], [currentBottom(2) nextBottom(2)], [currentBottom(3) nextBottom(3)]);
+%	  drawnow;
+%	end	
+%
+%	for i = 1:length(xi)
+%		if face(i)==1
+%			lineSpec = '.r';
+%		elseif face(i)==2
+%                        lineSpec = '.c';
+%		elseif face(i)==3
+%                        lineSpec = '.g';
+%		elseif face(i)==4
+%                        lineSpec = '.y';
+%		elseif face(i)==5
+%                        lineSpec = '.b';
+%		elseif face(i)==6
+%                        lineSpec = '.m';
+%		end
+%		plot3(xi(i), yi(i), zi(i), lineSpec);
+%		drawnow;
+%	end
+%

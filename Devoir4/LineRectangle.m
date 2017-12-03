@@ -22,7 +22,6 @@ function [R d] = LineRectangle(omega, intersectxy, poso, hCylindre, mCylindre, r
 %		d = 1;
 %	else 
   if ~d
-    isOut 
 		if (omega(3)>0 || isOut) || (omega(3)<0 || isOut)
 			z = mCylindre(3)-hCylindre/2;
 		else
