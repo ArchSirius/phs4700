@@ -28,10 +28,6 @@ function [w1, isRefracted] =  Refraction(r, w0, mCylindre, hCylindre, n_in, n_ou
   % TODO gerer reflextion total interne
   theta_out = asin(n_in * sin(theta_in) / n_out);
 
-  if w0(3) < 0
-    theta_out = -theta_out;
-  end
-
   angleNormal_xy = atan2(normal(2), normal(1));
   w1 = [sin(z_offset-theta_out)*cos(pi-phi_out+angleNormal_xy) sin(z_offset-theta_out)*sin(pi-phi_out+angleNormal_xy) cos(z_offset-theta_out)];
   isRefracted = 1;
