@@ -1,41 +1,34 @@
-function [R d] = LineRectangle(omega, intersectxy, poso, hCylindre, mCylindre, rCylindre, isOut)
-	if omega(1) ~= 0
-		t = (intersectxy(1) - poso(1)) / omega(1);
-	elseif omega(2) ~= 0
-		t = (intersectxy(2) - poso(2)) / omega(2);
+function [R d] = LineRectangle(w0, intersectxy, r0, hCylindre, mCylindre, rCylindre, isOut)
+	if w0(1) ~= 0
+		t = (intersectxy(1) - r0(1)) / w0(1);
+	elseif w0(2) ~= 0
+		t = (intersectxy(2) - r0(2)) / w0(2);
 	else
-		error('there is no slope, only Zuul');	
+		error('there is no slope, only Zuul');
 	end
 
-  normal = [poso(1) - intersectxy(1) poso(2) - intersectxy(2) 0];
-  x = intersectxy(1);
-  y = intersectxy(2);
-  maxz = mCylindre(3) + hCylindre/2;
-  minz = mCylindre(3) - hCylindre/2;
-  [d R] = linePlane(poso, omega, normal, [x y 0], x, x, y, y, minz, maxz);
-  
+	normal = [r0(1)-intersectxy(1) r0(2)-intersectxy(2) 0];
+	x = intersectxy(1);
+	y = intersectxy(2);
+	maxz = mCylindre(3) + hCylindre / 2;
+	minz = mCylindre(3) - hCylindre / 2;
+	[d R] = LinePlane(r0, w0, normal, [x y 0], x, x, y, y, minz, maxz);
 
-%	r = poso + t*omega;
-	
-%	if (r(3) <= mCylindre(3)+hCylindre/2 && r(3) >= mCylindre(3)-hCylindre/2)
-%		R = r;
-%		d = 1;
-%	else 
-  if ~d
-		if (omega(3)>0 || isOut) || (omega(3)<0 || isOut)
-			z = mCylindre(3)-hCylindre/2;
+	if ~d
+		if (w0(3) > 0 && isOut) || (w0(3) < 0 && ~isOut)
+			z = mCylindre(3) - hCylindre / 2;
 		else
-			z = mCylindre(3)+hCylindre/2;
+			z = mCylindre(3) + hCylindre / 2;
 		end
-		
-		t = (z - poso(3)) / omega(3);
-		r = poso + t*omega;
 
-		if norm(R(1:2)-mCylindre(1:2))<rCylindre
-		  R = r;
-		  d = 1;
+		t = (z - r0(3)) / w0(3);
+		r = r0 + t * w0;
+
+		if norm(R(1:2) - mCylindre(1:2)) < rCylindre
+			R = r;
+			d = 1;
 		else
-		  R = NaN;
-		  d = 0;
+			R = NaN;
+			d = 0;
 		end
-	end	
+	end
