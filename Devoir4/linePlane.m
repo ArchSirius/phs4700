@@ -3,7 +3,7 @@ function [isCollision vecteur_resultant, t] = linePlane(r0, v, n, point, minX, m
   epsilon = 1e-10;
   top = dot(n, point) - dot(n, r0);
   bottom = dot(v, n);
-  if ~bottom
+  if bottom == 0
     isCollision = false;
     vecteur_resultant = [0 0 0];
   else
