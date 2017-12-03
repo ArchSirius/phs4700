@@ -6,10 +6,13 @@ function [w1, isRefracted] =  Refraction(r, w0, mCylindre, hCylindre, n_in, n_ou
   % bottom or top 
   if (z == low_z)
     normal = [0 0 -1];
+    z_offset = pi;
   elseif (z == high_z) 
     normal = [0 0 1];
+    z_offset = 0;
   else
     normal = [r(1)-mCylindre(1) r(2)-mCylindre(2) 0];
+    z_offset = pi/2;
   end
   
   w0_xy = w0(1:2);
@@ -30,7 +33,7 @@ function [w1, isRefracted] =  Refraction(r, w0, mCylindre, hCylindre, n_in, n_ou
   end
 
   angleNormal_xy = atan2(normal(2), normal(1));
-  w1 = [sin(theta_out)*cos(pi-phi_out+angleNormal_xy) sin(theta_out)*sin(pi-phi_out+angleNormal_xy) cos(theta_out)];
+  w1 = [sin(z_offset-theta_out)*cos(pi-phi_out+angleNormal_xy) sin(z_offset-theta_out)*sin(pi-phi_out+angleNormal_xy) cos(z_offset-theta_out)];
   isRefracted = 1;
   if abs(phi_out)>(pi/2) || abs(theta_out)>(pi/2)
 	  isRefracted = 0;
