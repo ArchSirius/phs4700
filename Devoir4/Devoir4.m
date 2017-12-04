@@ -1,6 +1,6 @@
 function [xi yi zi face] = Devoir4(nout, nin, poso)
-	N = 100;
-	M = 100;
+	N = 200;
+	M = 200;
 
 	hCylindre = 0.18;
 	rCylindre = 0.02;
@@ -46,9 +46,9 @@ function [xi yi zi face] = Devoir4(nout, nin, poso)
 				if d
 					[collision, iFace, r] = FindCollision(R, omega, 0, mCylindre, hCylindre, rCylindre, nin, nout);
 					if collision
-						xi = [xi; r(1)];
-						yi = [yi; r(2)];
-						zi = [zi; r(3)];
+						xi = [xi; R(1)];
+						yi = [yi; R(2)];
+						zi = [zi; R(3)];
 						face = [face; iFace];
 					end
 				end
@@ -59,17 +59,23 @@ function [xi yi zi face] = Devoir4(nout, nin, poso)
 	divisions = 18;
 	n = 2 * pi / divisions;
 
-	for i = 0:n-1
+	figure;
+	axis manual;
+	axis([0 0.1 0 0.1 0 0.22]);
+	hold on;
+
+	for i = 0:divisions
 		current = mCylindre + [rCylindre*cos(i*n) rCylindre*sin(i*n) 0];
 		currentTop = current + [0 0 hCylindre/2];
 		currentBottom = current - [0 0 hCylindre/2];
-		next = mCylindre + [rCylindre*cos(i*(n+1)) rCylindre*sin(i*(n+1)) 0];
+		next = mCylindre + [rCylindre*cos((i+1)*n) rCylindre*sin((i+1)*n) 0];
 		nextTop = next + [0 0 hCylindre/2];
 		nextBottom = next - [0 0 hCylindre/2];
 
-		plot3([currentTop(1) currentBottom(1)], [currentTop(2) currentBottom(2)], [currentTop(3) currentBottom(3)]);
-		plot3([currentTop(1) nextTop(1)], [currentTop(2) nextTop(2)], [currentTop(3) nextTop(3)]);
-		plot3([currentBottom(1) nextBottom(1)], [currentBottom(2) nextBottom(2)], [currentBottom(3) nextBottom(3)]);
+        lineSpec = '--.k';
+		plot3([currentTop(1) currentBottom(1)], [currentTop(2) currentBottom(2)], [currentTop(3) currentBottom(3)], lineSpec);
+		plot3([currentTop(1) nextTop(1)], [currentTop(2) nextTop(2)], [currentTop(3) nextTop(3)], lineSpec);
+		plot3([currentBottom(1) nextBottom(1)], [currentBottom(2) nextBottom(2)], [currentBottom(3) nextBottom(3)], lineSpec);
 		drawnow;
 	end
 
@@ -88,5 +94,6 @@ function [xi yi zi face] = Devoir4(nout, nin, poso)
 			lineSpec = '.m';
 		end
 		plot3(xi(i), yi(i), zi(i), lineSpec);
-		drawnow;
-	end
+    end
+    drawnow;
+    hold off;
