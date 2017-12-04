@@ -1,4 +1,4 @@
-function [w1, isRefracted] =  Refraction(r, w0, mCylindre, hCylindre, nin, nout)
+function [w1, isRefracted] =  Refraction(r, w0, mCylindre, hCylindre, nin, nout, isOut)
 	epsilon = 1e-10;
 	low_z = mCylindre(3) - 0.5 * hCylindre;
 	high_z  = mCylindre(3) + 0.5 * hCylindre;
@@ -12,6 +12,9 @@ function [w1, isRefracted] =  Refraction(r, w0, mCylindre, hCylindre, nin, nout)
 		z_offset = 0;
 	else
 		normal = [r(1)-mCylindre(1) r(2)-mCylindre(2) 0];
+		if ~isOut
+			normal = [-normal(1) -normal(2) normal(3)];
+		end
 		z_offset = pi/2;
 	end
 
