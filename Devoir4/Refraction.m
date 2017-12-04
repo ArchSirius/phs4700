@@ -11,9 +11,15 @@ function [w1, isRefracted] =  Refraction(r, w0, mCylindre, hCylindre, nin, nout,
 
 	if z == low_z
 		normal = [0 0 -1];
+		if ~isOut
+			normal = [normal(1) normal(2) -normal(3)];
+		end
 		z_offset = pi;
 	elseif z == high_z
 		normal = [0 0 1];
+		if ~isOut
+			normal = [normal(1) normal(2) -normal(3)];
+		end
 		z_offset = 0;
 	else
 		normal = [r(1)-mCylindre(1) r(2)-mCylindre(2) 0];
