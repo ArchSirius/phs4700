@@ -1,6 +1,6 @@
 function [xi yi zi face] = Devoir4(nout, nin, poso)
-	N = 200;
-	M = 200;
+	N = 400;
+	M = 400;
 
 	hCylindre = 0.18;
 	rCylindre = 0.02;
