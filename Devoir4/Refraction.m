@@ -1,4 +1,9 @@
 function [w1, isRefracted] =  Refraction(r, w0, mCylindre, hCylindre, nin, nout, isOut)
+	if ~isOut
+		tmp = nin;
+		nin = nout;
+		nout = tmp;
+	end
 	epsilon = 1e-10;
 	low_z = mCylindre(3) - 0.5 * hCylindre;
 	high_z  = mCylindre(3) + 0.5 * hCylindre;
