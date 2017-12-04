@@ -1,4 +1,4 @@
-function [w1, isRefracted] = Refraction(r, w0, mCylindre, hCylindre, nin, nout, isOut)
+function [w1 isRefracted] = Refraction(r, w0, mCylindre, hCylindre, nin, nout, isOut)
 	if ~isOut
 		n1 = nin;
 		n2 = nout;

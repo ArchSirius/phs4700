@@ -1,4 +1,4 @@
-function [isCollision vecteur_resultant, t] = LinePlane(r0, v, n, point, minX, maxX, minY, maxY, minZ, maxZ)
+function [isCollision vecteur_resultant t] = LinePlane(r0, v, n, point, minX, maxX, minY, maxY, minZ, maxZ)
 	t = 0;
 	epsilon = 1e-10;
 	top = dot(n, point) - dot(n, r0);

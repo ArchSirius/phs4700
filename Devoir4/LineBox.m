@@ -1,4 +1,4 @@
-function [collision, face, r] = LineBox(r0, w0)
+function [collision face r] = LineBox(r0, w0)
 	minX = 0.03;
 	maxX = 0.04;
 	minY = 0.03;
